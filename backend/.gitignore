@@ -6,6 +6,7 @@ node_modules/
 
 # Database files
 users.db
+addUser.js
 
 # Logs
 *.log
