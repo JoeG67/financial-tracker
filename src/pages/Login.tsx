@@ -32,6 +32,7 @@ const Login = () => {
   };
 
   return (
+    
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-t from-blue-600 to-blue-200">
       <form
         onSubmit={handleLogin}
@@ -58,7 +59,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className="w-full text-black p-2 rounded border !bg-blue-200"
+          className="w-full !font-bold text-black p-2 rounded border !bg-blue-200"
         >
           Login
         </button>
