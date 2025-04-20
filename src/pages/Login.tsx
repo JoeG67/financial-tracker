@@ -6,6 +6,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const isFormValid =  email.trim() != "" &&  password.trim() != ""
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -17,9 +19,11 @@ const Login = () => {
       });
 
       const data = response.data;
+      console.log("Login response data:", );
       if (!response.data) throw new Error(data.error || "Login failed");
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("email", data.email);
       alert("Login successful!");
       window.location.href = "/dashboard";
     } catch (err: unknown) {
@@ -39,7 +43,7 @@ const Login = () => {
         className="p-6 bg-white rounded shadow-md w-80"
       >
         <h2 className="text-xl font-semibold mb-4 text-black">Login</h2>
-        {error && <p className="text-red-500">{error}</p>}
+       
 
         <input
           type="email"
@@ -48,7 +52,6 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
           className="w-full p-2 mb-3 border text-black border-black rounded bg-white"
         />
-
         <input
           type="password"
           placeholder="Password"
@@ -56,11 +59,15 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="w-full p-2 mb-3 border text-black border-black rounded bg-white"
         />
-
+ {error && <p className="text-red-500">{error}</p>}
         <button
           type="submit"
-          className="w-full !font-bold text-black p-2 rounded border !bg-blue-200"
-        >
+            className={`w-full !font-bold p-2 !rounded-lg !border-none ${
+          isFormValid
+            ? "!bg-blue-500 !text-white"
+            : "!bg-gray-300 !text-gray-600 cursor-not-allowed"
+        }`}
+      >
           Login
         </button>
       </form>
