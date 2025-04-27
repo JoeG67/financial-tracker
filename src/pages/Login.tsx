@@ -5,12 +5,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const isFormValid =  email.trim() != "" &&  password.trim() != ""
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setIsLoading(true);
 
     try {
       const response = await axios.post("http://localhost:5000/login", {
@@ -24,7 +26,7 @@ const Login = () => {
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("email", data.email);
-      alert("Login successful!");
+      
       window.location.href = "/dashboard";
     } catch (err: unknown) {
       console.error(
@@ -32,6 +34,7 @@ const Login = () => {
         err.response?.data?.message || err.message
       );
       setError("Invalid email or password");
+      setIsLoading(false);
     }
   };
 
@@ -66,10 +69,10 @@ const Login = () => {
           isFormValid
             ? "!bg-blue-500 !text-white"
             : "!bg-gray-300 !text-gray-600 cursor-not-allowed"
-        }`}
+        }${isLoading && "bg-gray-400 cursor-wait"}`}
       >
-          Login
-        </button>
+          {isLoading ? "Logging in..." : "Login"}
+          </button>
       </form>
     </div>
   );
