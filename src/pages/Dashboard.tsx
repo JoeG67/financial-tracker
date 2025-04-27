@@ -28,7 +28,10 @@ const Dashboard = () => {
       setUserEmail(email);
       localStorage.setItem("email", email); // Store email in localStorage if needed
     } catch (err) {
-      console.error("Error fetching user email:", err.response?.data?.message || err.message);
+      console.error(
+        "Error fetching user email:",
+        err.response?.data?.message || err.message
+      );
     }
   };
 
@@ -49,9 +52,13 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 text-white bg-gradient-to-t from-blue-600 to-blue-200 min-h-screen">
+    <div className="flex flex-col items-center justify-center p-6 text-black bg-blue-100 min-h-screen">
       <div className="w-full fixed top-0 z-50 text-white bg-[#1b2024] flex items-center justify-between p-4">
-        <h1>Logo</h1>
+        <img
+          src="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-dashboard-glyph-black-icon-png-image_691533.jpg"
+          alt="Logo"
+          className="w-12 h-12 object-contain"
+        />
         <h2 className="text-2xl font-bold">
           Welcome back, {userEmail ? userEmail : "User"}
         </h2>
@@ -63,6 +70,22 @@ const Dashboard = () => {
             Logout
           </button>
         </div>
+      </div>
+      <div className = "flex flex-row justify-between gap-2  ">
+      <div className="bg-white rounded-lg ">
+        {" "}
+        <p className="p-4">
+          Your current balance is{" "}
+          <span className="text-green-500">RM5000. </span>{" "}
+        </p>
+      </div>
+      <div className="bg-white rounded-lg ">
+        {" "}
+        <p className="p-4">
+          Your current balance is{" "}
+          <span className="text-green-500">RM5000. </span>{" "}
+        </p>
+      </div>
       </div>
     </div>
   );
