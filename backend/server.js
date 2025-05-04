@@ -65,6 +65,21 @@ app.get("/user", (req, res) => {
   });
 });
 
+app.get("/api/user-budget/:email", async (req, res) => {
+  const email = req.params.email;
+
+  const query = `
+    SELECT initial_balance, phone_bill, transportation, utilities, entertainment
+    FROM users
+    WHERE email = ?
+  `;
+
+  db.get(query, [email], (err, row) => {
+    if (err) return res.status(500).json({ error: "Database error" });
+    if (!row) return res.status(404).json({ error: "User not found" });
+    res.json(row);
+  });
+});
 
 
 // 🔹 Start Server
