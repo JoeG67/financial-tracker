@@ -43,14 +43,16 @@ const Login = () => {
     
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-t from-blue-600 to-blue-200">
       <form onSubmit={handleLogin} className="p-6 bg-white rounded shadow-md w-80">
-        <h2 className="text-xl font-semibold mb-4 text-black">Login</h2>
+      <h2 className="text-xl font-bold mb-4  text-black">Welcome Back</h2>
+
+        <p className="text-lg font-semibold mb-4 text-black">Login</p>
         <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} 
-        className="w-full p-2 mb-3 border text-black border-black rounded bg-white" />
+        className="w-full p-2 mb-3 border border-gray-400 rounded bg-white" />
         <input
           type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 mb-3 border text-black border-black rounded bg-white"/>
+          className="w-full p-2 mb-3 border border-gray-400  rounded bg-white"/>
           {error && <p className="text-red-500">{error}</p>}
-        <button type="submit" className={`w-full !font-bold p-2 !rounded-lg !border-none 
+        <button type="submit" className={`w-full !font-bold p-2 !rounded-xl !border-none !text-white
         ${ isFormValid ? "!bg-blue-500 !text-white" : "!bg-gray-300 !text-gray-600 cursor-not-allowed"
         }${isLoading && "bg-gray-400 cursor-wait"}`}
       >
