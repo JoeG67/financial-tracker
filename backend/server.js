@@ -81,6 +81,26 @@ app.get("/api/user-budget/:email", async (req, res) => {
   });
 });
 
+app.put("/api/user-budget/:email", (req, res) => {
+  const email = req.params.email;
+  const { initial_balance, phone_bill, transportation, utilities, entertainment } = req.body;
+
+  const query = `
+    UPDATE users
+    SET initial_balance = ?, phone_bill = ?, transportation = ?, utilities = ?, entertainment = ?
+    WHERE email = ?
+  `;
+
+  db.run(
+    query,
+    [initial_balance, phone_bill, transportation, utilities, entertainment, email],
+    function (err) {
+      if (err) return res.status(500).json({ error: "Failed to update budget" });
+      res.json({ message: "Budget updated successfully" });
+    }
+  );
+});
+
 
 // 🔹 Start Server
 app.listen(5000, () => console.log("Server running on port 5000 🚀"));
