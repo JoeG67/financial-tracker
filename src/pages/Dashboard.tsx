@@ -23,13 +23,18 @@ const Dashboard = () => {
       setUserEmail(email);
       localStorage.setItem("email", email);
     } catch (err) {
-      console.error("Error fetching user email:", err.response?.data?.message || err.message);
+      console.error(
+        "Error fetching user email:",
+        err.response?.data?.message || err.message
+      );
     }
   };
 
   const fetchBudgetData = async (email: string) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/user-budget/${email}`);
+      const response = await axios.get(
+        `http://localhost:5000/api/user-budget/${email}`
+      );
       setBudgetData(response.data);
       setEditedBudget(response.data); // allow editing
     } catch (err) {
@@ -58,7 +63,10 @@ const Dashboard = () => {
     if (!userEmail) return;
 
     try {
-      await axios.put(`http://localhost:5000/api/user-budget/${userEmail}`, editedBudget);
+      await axios.put(
+        `http://localhost:5000/api/user-budget/${userEmail}`,
+        editedBudget
+      );
       setBudgetData(editedBudget);
       alert("Budget updated successfully!");
     } catch (err) {
@@ -67,7 +75,8 @@ const Dashboard = () => {
     }
   };
 
-  if (!isAuthChecked) return <div className="text-white">Checking authentication...</div>;
+  if (!isAuthChecked)
+    return <div className="text-white">Checking authentication...</div>;
 
   if (!auth?.isAuthenticated) {
     console.warn("🔴 Redirecting to login because user is not authenticated");
@@ -76,13 +85,15 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col items-center justify-center p-6 text-black bg-blue-100 min-h-screen">
-      <div className="w-full fixed top-0 z-50 text-white bg-[#1b2024] flex items-center justify-between p-4 text-xl">
+      <div className="w-full fixed top-0 z-50 text-white bg-[#30363c] flex items-center justify-between p-4 text-xl">
         <img
-          src="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-dashboard-glyph-black-icon-png-image_691533.jpg"
+          src="https://static.vecteezy.com/system/resources/thumbnails/038/516/357/small/ai-generated-eagle-logo-design-in-black-style-on-transparant-background-png.png"
           alt="Logo"
           className="w-12 h-12 object-contain"
         />
-        <h2 className="text-2xl font-bold">Welcome back, {userEmail || "User"}</h2>
+        <h2 className="text-2xl font-bold">
+          Welcome back, {userEmail || "User"}
+        </h2>
         <div>
           <button
             onClick={auth.logout}
@@ -96,10 +107,17 @@ const Dashboard = () => {
       {budgetData && editedBudget ? (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 mt-24">
-            {["initial_balance", "phone_bill", "transportation", "utilities", "entertainment"].map((field) => (
-              <div key={field} className="bg-white rounded-lg shadow p-4">
-                <label className="block text-xl capitalize mb-2">
-                  {field.replace("_", " ")}:
+            {[
+              "initial_balance",
+              "phone_bill",
+              "transportation",
+              "utilities",
+              "entertainment",
+            ].map((field) => (
+              <div key={field} className="bg-white rounded-lg shadow p-4 text-xs text-left text-black !pb-4">
+                <label className="block capitalize mb-2">
+                   {field !== "initial_balance" ? "Your monthly " : "Your "}
+ {field.replace("_", " ")}  {field !== "initial_balance" ? "cost " : ""} is:
                 </label>
                 <input
                   type="number"
@@ -110,10 +128,11 @@ const Dashboard = () => {
               </div>
             ))}
 
-            <div className="bg-white rounded-lg shadow p-4">
-              <p className="text-xl">
-                Your remaining balance is{" "}
-                <span className="text-green-500">
+            <div className="bg-white rounded-lg shadow p-3">
+              <p className="">
+                <p className="text-xs text-left text-black !pb-4"> Your remaining balance is </p>
+
+                <span className="text-green-500 text-xl">
                   RM
                   {editedBudget.initial_balance -
                     (editedBudget.phone_bill +
@@ -127,13 +146,15 @@ const Dashboard = () => {
 
           <button
             onClick={handleSave}
-            className="mt-4 bg-green-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-700"
+            className="mt-4 !bg-green-600 !border-green-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-700"
           >
             Save Changes
           </button>
         </>
       ) : (
-        <div className="text-lg mt-24 text-gray-700">Loading budget data...</div>
+        <div className="text-lg mt-24 text-gray-700">
+          Loading budget data...
+        </div>
       )}
     </div>
   );
