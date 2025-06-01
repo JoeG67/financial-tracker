@@ -87,7 +87,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col items-center justify-center p-6 text-black bg-blue-100 min-h-screen">
-      <div className="w-full fixed top-0 z-50 text-white bg-[#30363c] flex items-center justify-between p-2">
+      <div className="w-full fixed top-0 z-50 text-white bg-rose-800 flex items-center justify-between p-2">
         <img
           src="https://static.vecteezy.com/system/resources/thumbnails/038/516/357/small/ai-generated-eagle-logo-design-in-black-style-on-transparant-background-png.png"
           alt="Logo"
@@ -97,7 +97,7 @@ const Dashboard = () => {
         <div>
           <button
             onClick={auth.logout}
-            className=" !bg-red-500 !border-0 !p-2 text-white !rounded-lg !font-bold"
+            className=" !bg-amber-500 hover:bg-amber-600 !border-0 !p-2 text-white !rounded-lg !font-bold"
           >
             <h2 className="text-sm font-bold">Logout</h2>
           </button>
@@ -106,7 +106,7 @@ const Dashboard = () => {
       <div>
         {budgetData && editedBudget ? (
           <>
-            <h2 className="text-xl font-bold mt-24 px-6">
+            <h2 className="text-left text-xl font-bold mt-20 px-6">
               Welcome back, {userEmail || "User"}. The current date is<p>{new Date().toDateString()}</p>
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 mt-10">
@@ -158,7 +158,7 @@ const Dashboard = () => {
 
             <button
               onClick={handleSave}
-              className="mt-10 !bg-green-600 !border-green-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-700"
+              className="mt-10 !bg-green-600 !border-green-600 text-white !font-bold px-6 py-2 rounded-lg  hover:bg-green-700"
             >
               Save Changes
             </button>
