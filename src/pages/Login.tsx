@@ -41,13 +41,13 @@ const Login = () => {
 
   return (
     <div className="flex-col grid grid-cols-2 items-center justify-center min-h-screen bg-white">
-      <div className="bg-gradient-to-t from-blue-600 to-blue-900 items-center h-[750px] flex flex-col justify-center">
+      <div className="bg-gradient-to-t from-blue-700 to-blue-900 items-center h-[750px] flex flex-col justify-center">
         <h1 className="text-xl font-bold text-white p-4">
           HDJ Financial Tracker
         </h1>
         <h2 className=" text-white">Track your income, monitor expenses, and stay on top of your monthly budget — all in one simple dashboard.</h2>
       </div>
-      <div className="flex flex-col justify-center rounded shadow-md h-[750px]">
+      <div className="flex flex-col justify-center rounded bg-amber-50 shadow-md h-[750px]">
         <form
           onSubmit={handleLogin}
           className=" p-10 w-80 mx-auto"
@@ -75,8 +75,8 @@ const Login = () => {
             className={`w-full !font-bold p-2 !rounded-xl !border-none !text-white
         ${
           isFormValid
-            ? "!bg-blue-500 !text-white"
-            : "!bg-gray-300 !text-gray-600 cursor-not-allowed"
+            ? "!bg-blue-900 !text-white"
+            : "!bg-gradient-to-t from-blue-400 to-blue-900 !text-gray-600 cursor-not-allowed"
         }${isLoading && "bg-gray-400 cursor-wait"}`}
           >
             {isLoading ? "Logging in..." : "Login"}
